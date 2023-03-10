@@ -6,13 +6,13 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        
-        <Weather/>
+        <Weather />
         <footer>
           This project was coded by Dary Bena is{" "}
           <a
             href="https://github.com/DaryBena/my-weather-app-react"
             target="_blank"
+            rel="noreferrer"
           >
             open-sourced on GitHub
           </a>

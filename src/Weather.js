@@ -11,7 +11,8 @@ export default function Weather(){
                 <input
                   type="search"
                   placeholder="Tape a city "
-                  className='form-control'                                    
+                  className='form-control' 
+                  autoFocus="on"                                   
                   autocomplete="off"
                 />
               </div>
@@ -33,12 +34,12 @@ export default function Weather(){
             <div className="col-6">
               <img src="" alt="Mostly cloudy" className="float-left" />
               <span className="float-left">
-                <strong>6</strong>
+                <span className='temperature'>6</span>
                 <span className="units">
-                  <a href="#" className="active">
+                  <a href="" className="active">
                     °C
                   </a>{" "}
-                  |<a href="#">°F</a>
+                  |<a href="">°F</a>
                 </span>
               </span>
             </div>
