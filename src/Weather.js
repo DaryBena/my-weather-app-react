@@ -2,27 +2,36 @@ import React, {useState} from 'react';
 import axios from "axios";
 import './Weather.css';
 
-export default function Weather(){
-  const [ready, setReady]=useState(false);
-  const [temperature, setTemperature]=useState(null);
+export default function Weather(props){
+ 
+  const [weatherData, setWeatherData]=useState({ready: false});
   function handleResponse(response){
     console.log(response.data);
-    setTemperature(response.data.temperature.current);
-    setReady(true);
+    setWeatherData({
+      ready: true,
+      temperature: response.data.temperature.current,
+      wind: response.data.wind.speed,
+      city: response.data.city,
+      iconUrl: response.data.condition.icon_url,
+      humidity: response.data.temperature.humidity,
+      description: response.data.condition.description,
+      time: "Monday 8:00",
+    });
+    
   }
-  if (ready){
+  if (weatherData.ready){
 return (
   <div className="Weather">
     <div className="container">
       <form className="mb-3">
         <div className="row">
-          <div class="col-9">
+          <div className="col-9">
             <input
               type="search"
               placeholder="Tape a city "
               className="form-control"
               autoFocus="on"
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
           <div className="col-3">
@@ -34,16 +43,16 @@ return (
           </div>
         </div>
       </form>
-      <h1>New York</h1>
+      <h1>{weatherData.city}</h1>
       <ul>
-        <li>Last updated: Monday 8:00</li>
-        <li>Mostly cloudy</li>
+        <li>Last updated: {weatherData.time}</li>
+        <li className="text-capitalize">{weatherData.description}</li>
       </ul>
       <div className="row">
         <div className="col-6">
-          <img src="" alt="Mostly cloudy" className="float-left" />
+          <img src={weatherData.iconUrl} alt={weatherData.description} className="float-left" />
           <span className="float-left">
-            <span className="temperature">{Math.round(temperature)}</span>
+            <span className="temperature">{Math.round(weatherData.temperature)}</span>
             <span className="units">
               
                 °C
@@ -56,10 +65,10 @@ return (
         <div className="col-6">
           <ul>
             <li>
-              Humidity: <span>83</span>%
+              Humidity: <span>{weatherData.humidity}</span>%
             </li>
             <li>
-              Wind: <span>4</span> km/h
+              Wind: <span>{weatherData.wind}</span> km/h
             </li>
           </ul>
         </div>
@@ -69,9 +78,9 @@ return (
 );
   } else {
   const apiKey="88c56380f8t7a0673b2c0e04b7453o5a";
-  let city = "New York";
+
   let apiUrl =
-    `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
     return "Loading....";
   }
