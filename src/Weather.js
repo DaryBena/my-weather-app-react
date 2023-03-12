@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import './Weather.css';
+import FormattedDate from './FormattedDate';
 
 export default function Weather(props){
  
@@ -15,7 +16,7 @@ export default function Weather(props){
       iconUrl: response.data.condition.icon_url,
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
-      time: "Monday 8:00",
+      date: new Date(response.data.time*1000),
     });
     
   }
@@ -45,20 +46,24 @@ return (
       </form>
       <h1>{weatherData.city}</h1>
       <ul>
-        <li>Last updated: {weatherData.time}</li>
+        <li>
+          Last updated:
+          <FormattedDate date={weatherData.date} />
+        </li>
         <li className="text-capitalize">{weatherData.description}</li>
       </ul>
       <div className="row">
         <div className="col-6">
-          <img src={weatherData.iconUrl} alt={weatherData.description} className="float-left" />
+          <img
+            src={weatherData.iconUrl}
+            alt={weatherData.description}
+            className="float-left"
+          />
           <span className="float-left">
-            <span className="temperature">{Math.round(weatherData.temperature)}</span>
-            <span className="units">
-              
-                °C
-              {" "}
-              |°F
+            <span className="temperature">
+              {Math.round(weatherData.temperature)}
             </span>
+            <span className="units">°C |°F</span>
           </span>
         </div>
 
