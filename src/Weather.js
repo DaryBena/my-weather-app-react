@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import './Weather.css';
 
@@ -19,6 +19,7 @@ export default function Weather(props){
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
       date: new Date(response.data.time*1000),
+      coordinates: response.data.coordinates,
     });
     
   }
@@ -61,8 +62,8 @@ return (
           </div>
         </div>
       </form>
-      <WeatherInfo data={weatherData}/>
-      <WeatherForecast/>
+      <WeatherInfo data={weatherData} />
+      <WeatherForecast coord={weatherData.coordinates} />
     </div>
   </div>
 );
