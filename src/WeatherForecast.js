@@ -12,15 +12,12 @@ export default function WeatherForecast(props) {
   }, [props]);
 
   function handleResponse(response){
-    console.log(response.data);
-   setForecast(response.data.daily);
+      setForecast(response.data.daily);
    setLoaded(true);
-   
-  }
-  console.log(props);
+     }
+ 
   if (loaded){
-    console.log(forecast);
-    
+        
      return (
        <div className="WeatherForecast">
          <div className="row">
