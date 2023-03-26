@@ -56,7 +56,7 @@ return (
             <input
               type="submit"
               value="Search"
-              className="btn btn-primary btn-sm w-100"
+              className="btn btn-primary btn-sm w-80"
             />
           </div>
         </div>
